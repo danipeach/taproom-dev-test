@@ -1,0 +1,77 @@
+<div class="page-width accordion-wrapper">
+  {% if section.settings.title != blank %}
+    <div class="section-header">
+      <h2>{{ section.settings.title | escape }}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="accordion">
+      {% for block in section.blocks %}
+        <div class="panel">
+          {% if block.settings.title != blank %}
+            <h4 class="title">{{ block.settings.title }}</h4>
+          {% endif %}
+          {% if block.settings.content != blank %}
+            <div class="content">
+              {{ block.settings.content }}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div> 
+
+{% schema %}
+{
+  "name": "Accordion",
+  "class": "index-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Accordion"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panels",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title for your accordion panel"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Here is the content for your accordion panel.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "panel"
+        },
+        {
+          "type": "panel"
+        },
+        {
+          "type": "panel"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
