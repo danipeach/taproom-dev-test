@@ -1,0 +1,102 @@
+<div class="page-width accordion-wrapper">
+  {% if section.settings.title != blank %}
+    <div class="section-header">
+      <h2>{{ section.settings.title | escape }}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="accordion">
+      {% for block in section.blocks %}
+        <div class="panel{% if forloop.first == true %} active{% endif %}">
+          {% if block.settings.title != blank %}
+            <h4 class="panel-title">
+              {{ block.settings.title | escape }}
+            </h4>
+          {% endif %}
+          {% if block.settings.content != blank %}
+            <div class="panel-content-wrapper">
+              <div class="panel-content">
+                {{ block.settings.content }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div> 
+
+{% schema %}
+{
+  "name": "Accordion",
+  "class": "index-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Accordion"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Panels",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title for your accordion panel"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Here is the content for your accordion panel.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Accordion",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "panel"
+        },
+        {
+          "type": "panel"
+        },
+        {
+          "type": "panel"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% javascript %}
+  var panels = document.getElementsByClassName('panel-title');
+  var i;
+
+  for (i = 0; i < panels.length; i++) {
+    if (panels[i].parentElement.classList.contains('active')) {
+      panels[i].nextElementSibling.style.maxHeight = panels[i].nextElementSibling.scrollHeight + 'px';
+    }
+
+    panels[i].addEventListener('click', function() {
+      this.parentElement.classList.toggle('active');
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+  }
+{% endjavascript %}
