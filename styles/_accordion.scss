@@ -1,8 +1,16 @@
 .panel {
     .panel-title {
         background-color: $gray;
+        cursor: pointer;
         margin-bottom: 0;
         padding: 2em;
+        position: relative;
+
+        &::after {
+            content: '\25BC';
+            position: absolute;
+            right: 2em;
+        }
     }
 
     .panel-content-wrapper {
@@ -13,6 +21,14 @@
 
         .panel-content {
             padding: 1.5em 1.5em 1.5em 2em;
+        }
+    }
+
+    &.active {
+        .panel-title {
+            &::after {
+                content: '\25B2';
+            }
         }
     }
 }
