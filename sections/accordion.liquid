@@ -8,9 +8,9 @@
   {% if section.blocks.size > 0 %}
     <div class="accordion">
       {% for block in section.blocks %}
-        <div class="panel">
+        <div class="panel {% if forloop.first == true %}active{% endif %}">
           {% if block.settings.title != blank %}
-            <h4 class="title">{{ block.settings.title }}</h4>
+            <h4 class="title">{{ block.settings.title | escape }}</h4>
           {% endif %}
           {% if block.settings.content != blank %}
             <div class="content">
@@ -75,3 +75,14 @@
   ]
 }
 {% endschema %}
+
+{% javascript %}
+  var panels = document.getElementsByClassName('panel');
+  var i;
+
+  for (i = 0; i < panels.length; i++) {
+    panels[i].addEventListener('click', function() {
+      this.classList.toggle('active');
+    })
+  }
+{% endjavascript %}
