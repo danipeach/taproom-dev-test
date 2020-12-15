@@ -1,0 +1,19 @@
+.panel {
+    .panel-title {
+        background-color: $gray;
+        margin-bottom: 0;
+        padding: 2em;
+    }
+
+    .panel-content-wrapper {
+        background-color: $light-gray;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .5s ease-in;
+
+        .panel-content {
+            padding: 1.5em 1.5em 1.5em 2em;
+        }
+    }
+}
+
