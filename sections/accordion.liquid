@@ -1,8 +1,8 @@
 <div class="page-width accordion-wrapper">
   {% if section.settings.title != blank %}
-    <div class="section-header">
-      <h2>{{ section.settings.title | escape }}
-    </div>
+      <h2 class="section-header">
+        {{ section.settings.title | escape }}
+      </h2>
   {% endif %}
 
   {% if section.blocks.size > 0 %}
@@ -82,6 +82,7 @@
 
 {% javascript %}
   var panels = document.getElementsByClassName('panel-title');
+  var content = document.getElementsByClassName('panel-content-wrapper');
   var i;
 
   for (i = 0; i < panels.length; i++) {
@@ -91,12 +92,22 @@
 
     panels[i].addEventListener('click', function() {
       this.parentElement.classList.toggle('active');
-      var content = this.nextElementSibling;
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
+
+      var c = this.nextElementSibling;
+      
+      if (c.style.maxHeight) {
+        c.style.maxHeight = null;
       } else {
-        content.style.maxHeight = content.scrollHeight + 'px';
+        c.style.maxHeight = c.scrollHeight + 'px';
       }
     });
   }
+
+  window.addEventListener('resize', function() {
+    for (i = 0; i < content.length; i++) {
+      if (content[i].parentElement.classList.contains('active')) {
+        content[i].style.maxHeight = content[i].scrollHeight + 'px';
+      }
+    }
+  });
 {% endjavascript %}
