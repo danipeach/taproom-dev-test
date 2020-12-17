@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://dr-taproom-test.myshopify.com",
   "env": {
     "url": "https://dr-taproom-test.myshopify.com"
   }

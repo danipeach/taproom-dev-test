@@ -18,3 +18,19 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+describe('Load the store and log in', () => {
+  it('loads', () => {
+    cy.visit('/')
+  })
+
+  it('can log in and reach homepage', () => {
+    cy.get('#password').type('faicaw')
+    cy.get('[type=submit]').click()
+    // pause a second to ensure the page can change before checking
+    cy.wait(1000)
+    cy.location().should(($url) => {
+      expect($url.pathname).to.not.equal('/password')
+    })
+  })
+})
