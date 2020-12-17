@@ -1,80 +1,80 @@
 .accordion {
-    @media (max-width: $bp-mobile - 1) {
-        margin: 0 -22px;
-    }
+  @media (max-width: $bp-mobile - 1) {
+      margin: 0 -22px;
+  }
 }
 
 .panel {
-    background-color: $light-gray;
-    margin-top: -1px;
+  background-color: $light-gray;
+  margin-top: -1px;
 
-    @media (max-width: $bp-tablet - 1) {
-        &:first-child {
-            .panel-title {
-                border-top: 0;
-            }
-        }
+  @media (max-width: $bp-tablet - 1) {
+    &:first-child {
+      .panel-title {
+        border-top: 0;
+      }
+    }
+
+    &:last-child {
+      .panel-title {
+        border-bottom: 0;
+      }
+
+      .panel-content {
+        border-top: 1px solid $gray;
+      }
+    }
+  }
+
+  @media (min-width: $bp-tablet) {
+    background-color: transparent;
     
-        &:last-child {
-            .panel-title {
-                border-bottom: 0;
-            }
-    
-            .panel-content {
-                border-top: 1px solid $gray;
-            }
-        }
+    &:not(:last-child) {
+      margin-bottom: 1em;
+    }
+  }
+
+  .panel-title {
+    border-bottom: 1px solid $gray;
+    border-top: 1px solid $gray;
+    cursor: pointer;
+    margin-bottom: 0;
+    padding: 1.5em 3em 1.5em 2em;
+    position: relative;
+
+    &::after {
+      content: '\25BC';
+      position: absolute;
+      right: 2em;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     @media (min-width: $bp-tablet) {
-        background-color: transparent;
-        
-        &:not(:last-child) {
-            margin-bottom: 1em;
-        }
+      border: 1px solid $gray;
     }
+  }
 
+  .panel-content-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease-in;
+
+    .panel-content {
+      padding: 1.5em 1.5em 1.5em 2em;
+
+      @media (min-width: $bp-tablet) {
+        background-color: $light-gray;
+        margin-top: 1em;
+      }
+    }
+  }
+
+  &.active {
     .panel-title {
-        border-bottom: 1px solid $gray;
-        border-top: 1px solid $gray;
-        cursor: pointer;
-        margin-bottom: 0;
-        padding: 1.5em 3em 1.5em 2em;
-        position: relative;
-
-        &::after {
-            content: '\25BC';
-            position: absolute;
-            right: 2em;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        @media (min-width: $bp-tablet) {
-            border: 1px solid $gray;
-        }
+      &::after {
+        content: '\25B2';
+      }
     }
-
-    .panel-content-wrapper {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height .5s ease-in;
-
-        .panel-content {
-            padding: 1.5em 1.5em 1.5em 2em;
-
-            @media (min-width: $bp-tablet) {
-                background-color: $light-gray;
-                margin-top: 1em;
-            }
-        }
-    }
-
-    &.active {
-        .panel-title {
-            &::after {
-                content: '\25B2';
-            }
-        }
-    }
+  }
 }
